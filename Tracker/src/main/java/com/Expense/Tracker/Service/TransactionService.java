@@ -8,7 +8,7 @@ import com.Expense.Tracker.Dto.TransactionViewDto;
 import java.util.List;
 
 public interface TransactionService {
-    public void addTransaction(List<TransactionDto> transactionDto);
+    public ResponseDto addTransaction(List<TransactionDto> transactionDto);
     public ResponseDto getTransactions(String userId);
 
    public ResponseDto deleteTransaction(String id);

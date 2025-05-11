@@ -17,12 +17,12 @@ public class TransactionController {
     TransactionService transactionService;
 
     @PostMapping("addTransaction")
-    public void addTransaction(@RequestBody List<TransactionDto> transactionDto) {
-        transactionService.addTransaction(transactionDto);
+    public ResponseDto addTransaction(@RequestBody List<TransactionDto> transactionDto) {
+       return transactionService.addTransaction(transactionDto);
     }
 
     @GetMapping("/getAllTransactions")
-    public ResponseDto getAllTransaction(String userId){
+    public ResponseDto getAllTransaction(@RequestParam String userId){
     return transactionService.getTransactions(userId);
 }
 @PostMapping("/deleteTransaction")

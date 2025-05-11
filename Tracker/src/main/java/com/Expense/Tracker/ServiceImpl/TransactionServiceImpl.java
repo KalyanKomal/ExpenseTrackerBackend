@@ -10,6 +10,7 @@ import com.Expense.Tracker.Repository.TransactionRepository;
 import com.Expense.Tracker.Repository.UserRepository;
 import com.Expense.Tracker.Service.TransactionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.coyote.Response;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService{
 ModelMapper modelMapper;
 
 
-    public void addTransaction(List<TransactionDto> transactionDtoList){
+    public ResponseDto addTransaction(List<TransactionDto> transactionDtoList){
         Optional<User> user=userRepo.findById(transactionDtoList.get(0).getUserId());
 List<Transaction> transactionList=new ArrayList<>();
         for(TransactionDto transactionDto:transactionDtoList){
@@ -57,6 +58,12 @@ transactionList.add(newTransaction);
         User existUser=user.get();
         existUser.setTransactionList(transactionList);
         userRepo.save(existUser);
+        ResponseDto responseDto=new ResponseDto();
+        responseDto.setData("Success");
+        responseDto.setMessage("Success");
+        responseDto.setHttpStatus(HttpStatus.OK);
+        responseDto.setStatusCode(200);
+        return responseDto;
     }
 
     @Override

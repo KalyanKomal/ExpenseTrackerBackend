@@ -119,7 +119,7 @@ public class UserController {
     }
 
     @PostMapping("/updateUser")
-    public User saveUser(@RequestParam String userId,@RequestParam  float budget){
+    public ResponseDto saveUser(@RequestParam String userId,@RequestParam  float budget){
     return userService.saveUser(userId,budget);
     }
 @PostMapping("/signup")

@@ -9,7 +9,7 @@ public interface UserService {
 
     public User saveLoginDetails(String userName, String password);
 
-    public User saveUser(String userId,float budget);
+    public ResponseDto saveUser(String userId,float budget);
 
     public User saveUserDetails(SignupDto signupDto);
 

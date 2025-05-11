@@ -37,16 +37,26 @@ return result;
     }
 
     @Override
-    public User saveUser(String userId, float budget) {
+    public ResponseDto saveUser(String userId, float budget) {
+        ResponseDto responseDto=new ResponseDto();
 
         Optional<User> existUser = userRepo.findById(userId);
         if(existUser.isPresent()){
             User user=existUser.get();
 //            user.setUser_Email(email);
             user.setUser_Budget(budget);
-            return userRepo.save(user);
+            User updated_User=userRepo.save(user);
+            responseDto.setStatusCode(200);
+            responseDto.setMessage("Success");
+            responseDto.setHttpStatus(HttpStatus.OK);
+            responseDto.setData(updated_User);
+            return responseDto;
         }
-        return null;
+        responseDto.setData(null);
+        responseDto.setMessage("Error user not found");
+        responseDto.setStatusCode(404);
+        responseDto.setHttpStatus(HttpStatus.BAD_REQUEST);
+        return responseDto;
     }
 
     @Override
