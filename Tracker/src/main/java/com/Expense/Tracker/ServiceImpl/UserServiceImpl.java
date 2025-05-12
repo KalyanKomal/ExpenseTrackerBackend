@@ -60,13 +60,27 @@ return result;
     }
 
     @Override
-    public User saveUserDetails(SignupDto signupDto) {
-        UUID id=UUID.randomUUID();
-        User newUser= modelMapper.map(signupDto,User.class);
-        newUser.setUser_Id(String.valueOf(id));
-        User result= userRepo.save(newUser);
+    public ResponseDto saveUserDetails(SignupDto signupDto) {
+        ResponseDto responseDto=new ResponseDto();
+        try {
+            UUID id = UUID.randomUUID();
+            User newUser = modelMapper.map(signupDto, User.class);
+            newUser.setUser_Id(String.valueOf(id));
+            User result = userRepo.save(newUser);
+            responseDto.setStatusCode(200);
+            responseDto.setMessage("Success");
+            responseDto.setHttpStatus(HttpStatus.OK);
+            responseDto.setData(result);
+            return responseDto;
+        } catch (Exception e) {
+e.printStackTrace();
+            responseDto.setData(null);
+            responseDto.setMessage("Error");
+            responseDto.setStatusCode(404);
+            responseDto.setHttpStatus(HttpStatus.BAD_REQUEST);
+            return responseDto;
+        }
 
-        return result;
     }
 
     @Override

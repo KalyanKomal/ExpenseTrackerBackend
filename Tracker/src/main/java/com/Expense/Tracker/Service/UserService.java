@@ -11,7 +11,7 @@ public interface UserService {
 
     public ResponseDto saveUser(String userId,float budget);
 
-    public User saveUserDetails(SignupDto signupDto);
+    public ResponseDto saveUserDetails(SignupDto signupDto);
 
    public ResponseDto checkUser(String emailId, String password);
 

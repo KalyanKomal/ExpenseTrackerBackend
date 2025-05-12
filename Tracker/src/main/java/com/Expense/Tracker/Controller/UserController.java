@@ -123,7 +123,7 @@ public class UserController {
     return userService.saveUser(userId,budget);
     }
 @PostMapping("/signup")
-    public User signupDetails(@RequestBody SignupDto signupDto){
+    public ResponseDto signupDetails(@RequestBody SignupDto signupDto){
     return userService.saveUserDetails(signupDto);
 }
 
